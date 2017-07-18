@@ -10,7 +10,7 @@ import { removeKeysRecursive } from "../../Helpers";
 let serverlessConfig: ServerlessPatched | null = null;
 
 beforeAll(async () => {
-  serverlessConfig = new ServerlessPatched("stage");
+  serverlessConfig = new ServerlessPatched("dev");
   await serverlessConfig.init();
   await serverlessConfig.run();
 });

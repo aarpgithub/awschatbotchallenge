@@ -1,8 +1,8 @@
 service: aarpai-middleware-lexbot
 frameworkVersion: ">=1.2.0 <2.0.0"
-plugins:
-  - deploy-lexbot
-  - deploy-dynamodb
+# plugins:
+#   - deploy-lexbot
+#   - deploy-dynamodb
 custom:
   defaultStage: stage
   stage: ${opt:stage, self:custom.defaultStage}
@@ -50,4 +50,27 @@ resources:
     HealthCarePremiumTable:
       Type: AWS::DynamoDB::Table
       Properties: ${self:custom.dynamodb.HealthCarePremiumTable.meta}
-    AARPAI: ${self:custom.config.AARP_AI_ROLE}
+    aarpAI: 
+      Type: AWS::IAM::Role
+      Properties:
+        Path: /service-role/
+        RoleName: aarpAI
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: LambdaLoggingCapability
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: Allow # note that these rights are given in the default policy and are required if you want logs out of your lambda(s)
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource: arn:aws:logs:${self:provider.region}:${self:custom.config.OWNER_ID}:log-group:/aws/lambda/*:*:*
