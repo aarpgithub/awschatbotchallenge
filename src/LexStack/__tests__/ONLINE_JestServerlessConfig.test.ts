@@ -11,7 +11,7 @@ let serverlessConfig: ServerlessPatched | null = null;
 
 describe("ONLINE:", () => {
   it("Should reflect the serverless config for each environment", async () => {
-    const stages: Array<DeploymentStage> = ["dev", "stage", "prod"];
+    const stages: Array<DeploymentStage> = ["dev"];
     const configs = stages.map(e => {
       return new ServerlessPatched(e);
     });

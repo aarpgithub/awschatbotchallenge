@@ -1,8 +1,8 @@
 service: aarpai-middleware-lexbot
 frameworkVersion: ">=1.2.0 <2.0.0"
-# plugins:
-#   - deploy-lexbot
-#   - deploy-dynamodb
+plugins:
+  - deploy-lexbot
+  - deploy-dynamodb
 custom:
   defaultStage: stage
   stage: ${opt:stage, self:custom.defaultStage}
