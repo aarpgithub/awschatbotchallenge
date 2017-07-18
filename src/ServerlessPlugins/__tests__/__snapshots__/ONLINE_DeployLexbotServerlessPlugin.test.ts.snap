@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Expected BotConfig should be pulled correctly from the serverless config 1`] = `
+Object {
+  "lexTestMode": true,
+  "ownerId": "321144413607",
+  "profile": "aarpai-middleware-lexbot-stage",
+  "region": "us-east-1",
+  "stage": "stage",
+}
+`;
+
+exports[`ONLINE: Deployed Bot definition should match expectations 1`] = `
+Object {
+  "botDefinition": Object {
+    "abortStatement": Object {
+      "messages": Array [
+        Object {
+          "content": "Sorry, I could not understand. Goodbye.",
+          "contentType": "PlainText",
+        },
+      ],
+      "responseCard": null,
+    },
+    "childDirected": false,
+    "clarificationPrompt": Object {
+      "maxAttempts": 2,
+      "messages": Array [
+        Object {
+          "content": "I'm sorry I didn't understand that. Can you please ask it in a different way?",
+          "contentType": "PlainText",
+        },
+      ],
+      "responseCard": null,
+    },
+    "description": "A bot used for testing purposes",
+    "failureReason": null,
+    "idleSessionTTLInSeconds": 120,
+    "intents": Array [
+      Object {
+        "intentName": "testmode_ExampleBotIntent",
+        "intentVersion": "$LATEST",
+      },
+    ],
+    "locale": "en-US",
+    "name": "testmode_ExampleBot",
+    "status": "READY",
+    "version": "$LATEST",
+    "voiceId": "Salli",
+  },
+  "intentDefinitions": Array [
+    Object {
+      "description": "This is just a definition for testing",
+      "dialogCodeHook": Object {
+        "messageVersion": "1.0",
+        "uri": "arn:aws:lambda:us-east-1:321144413607:function:HealthCareTool",
+      },
+      "fulfillmentActivity": Object {
+        "codeHook": Object {
+          "messageVersion": "1.0",
+          "uri": "arn:aws:lambda:us-east-1:321144413607:function:HealthCareTool",
+        },
+        "type": "CodeHook",
+      },
+      "name": "testmode_ExampleBotIntent",
+      "parentIntentSignature": null,
+      "sampleUtterances": Array [
+        "I would like to calculate premium increase",
+        "What would be my premium",
+        "What would be my health care premium",
+      ],
+      "slots": Array [
+        Object {
+          "description": "Choose 10 or 100",
+          "name": "ExampleBotSlotType",
+          "priority": 1,
+          "responseCard": null,
+          "sampleUtterances": Array [
+            "I'll take {ExampleBotSlotType}",
+            "My favorite number is {ExampleBotSlotType}",
+          ],
+          "slotConstraint": "Required",
+          "slotType": "AMAZON.NUMBER",
+          "slotTypeVersion": null,
+          "valueElicitationPrompt": Object {
+            "maxAttempts": 2,
+            "messages": Array [
+              Object {
+                "content": "Do you want 10 or 100?",
+                "contentType": "PlainText",
+              },
+            ],
+            "responseCard": null,
+          },
+        },
+        Object {
+          "description": "Represents a US State",
+          "name": "StateNameSlotType",
+          "priority": 2,
+          "responseCard": null,
+          "sampleUtterances": Array [
+            "I live in {StateNameSlotType}",
+            "I come from {StateNameSlotType}",
+          ],
+          "slotConstraint": "Required",
+          "slotType": "AMAZON.US_STATE",
+          "slotTypeVersion": null,
+          "valueElicitationPrompt": Object {
+            "maxAttempts": 2,
+            "messages": Array [
+              Object {
+                "content": "Provide your state",
+                "contentType": "PlainText",
+              },
+            ],
+            "responseCard": null,
+          },
+        },
+      ],
+      "version": "$LATEST",
+    },
+  ],
+  "slotTypeDefinitions": Array [
+    Object {
+      "description": "Choose 10 or 100",
+      "enumerationValues": Array [
+        Object {
+          "value": "100",
+        },
+        Object {
+          "value": "10",
+        },
+      ],
+      "name": "ExampleBotSlotType",
+      "version": "$LATEST",
+    },
+    Object {
+      "description": "Represents a US State",
+      "name": "StateNameSlotType",
+      "version": "$LATEST",
+    },
+  ],
+}
+`;

@@ -1,0 +1,30 @@
+PROFILE: default
+OWNER_ID: "103390586126"
+HEALTH_CARE_TOOL_LAMBDA_ROLE: arn:aws:iam::${self:custom.config.OWNER_ID}:role/service-role/aarpAI
+HEALTH_CARE_TOOL_DEPLOYMENT_BUCKET: aarp-ai-bucket
+
+# in dev environments, define the role and give it appropriate permmissions
+AARP_AI_ROLE: 
+  Type: AWS::IAM::Role
+  Properties:
+    Path: /service-role/
+    RoleName: aarpAI
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+              - lambda.amazonaws.com
+          Action: sts:AssumeRole
+    Policies:
+      - PolicyName: LambdaLoggingCapability
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow # note that these rights are given in the default policy and are required if you want logs out of your lambda(s)
+              Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+              Resource: arn:aws:logs:${self:provider.region}:${self:custom.config.OWNER_ID}:log-group:/aws/lambda/*:*:*

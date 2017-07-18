@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should be able to create a Close Action 1`] = `
+Object {
+  "fulfillmentState": "Fulfilled",
+  "message": Object {
+    "content": "test",
+    "contentType": "PlainText",
+  },
+  "type": "Close",
+}
+`;
+
+exports[`Should be able to create a Confirm action 1`] = `
+Object {
+  "message": Object {
+    "content": "sample message",
+    "contentType": "PlainText",
+  },
+  "slots": Object {},
+  "type": "ConfirmIntent",
+}
+`;
+
+exports[`Should be able to create a plaintext message 1`] = `
+Object {
+  "content": "sample message",
+  "contentType": "PlainText",
+}
+`;
+
+exports[`Should be able to create a plaintext message 2`] = `
+Object {
+  "content": "sample message",
+  "contentType": "PlainText",
+}
+`;

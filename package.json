@@ -1,0 +1,67 @@
+{
+  "name": "conversational_assistants",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test-once": "jest",
+    "test": "jest --watch --testPathIgnorePatterns COSTS_MONEY",
+    "test-unit": "jest --watch --testPathIgnorePatterns COSTS_MONEY --testPathIgnorePatterns ONLINE",
+    "test-online": "jest --watch --testPathPattern ONLINE",
+    "test-debug": "node --inspect ./node_modules/.bin/jest -runInBand --testPathIgnorePatterns COSTS_MONEY",
+    "build": "rm -rf ./lib/ && tsc",
+    "watch": "tsc -w",
+    "dev-deploy": "npm run build && serverless deploy -s dev && serverless deploy-lexbot -s dev",
+    "stage-deploy": "npm run build && serverless deploy -s stage && serverless deploy-lexbot -s stage && serverless deploy-dynamodb -s stage --table HealthCarePremiumTable",
+    "prod-deploy": "npm run build && serverless deploy -s prod && serverless deploy-lexbot -s prod"
+  },
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "skipBabel": true
+      }
+    },
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "jsx"
+    ],
+    "modulePathIgnorePatterns": [
+      "./lib/"
+    ]
+  },
+  "dependencies": {
+    "aws-sdk": "^2.85.0",
+    "bluebird": "^3.5.0",
+    "class-validator": "^0.7.2",
+    "locate-path": "^2.0.0",
+    "lodash": "^4.17.4",
+    "request": "^2.81.0",
+    "source-map-support": "^0.4.15",
+    "traverse": "^0.6.6",
+    "us-state-codes": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "0.0.14",
+    "@types/bluebird": "^3.5.8",
+    "@types/jest": "^20.0.2",
+    "@types/lodash": "^4.14.69",
+    "@types/node": "^8.0.13",
+    "@types/request": "0.0.46",
+    "@types/traverse": "^0.6.29",
+    "jest": "^20.0.4",
+    "serverless": "^1.17.0",
+    "ts-jest": "^20.0.7",
+    "typescript": "^2.4.1",
+    "typings": "^2.1.1"
+  }
+}

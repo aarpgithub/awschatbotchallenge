@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`excludeNil should remove null/undefined values from top-level of object 1`] = `
+Object {
+  "a": 1,
+  "b": "1",
+  "e": Object {
+    "a": 1,
+  },
+}
+`;
+
+exports[`sha256checksum of object should produce expected checksum value 1`] = `"f495c9d58385356851afed14daf8518ef6adbf8beea1b58a0014a4a06389a777"`;

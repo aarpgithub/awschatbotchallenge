@@ -1,0 +1,9 @@
+#Files
+.env
+#Folders
+lib/
+node_modules
+.serverless
+.project
+npm-debug.log
+.DS_Store

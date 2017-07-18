@@ -1,0 +1,53 @@
+service: aarpai-middleware-lexbot
+frameworkVersion: ">=1.2.0 <2.0.0"
+plugins:
+  - deploy-lexbot
+  - deploy-dynamodb
+custom:
+  defaultStage: stage
+  stage: ${opt:stage, self:custom.defaultStage}
+  config: ${file(env-vars/deploy-${self:custom.stage}.yml)}
+  lambda_environment: ${file(env-vars/lambda-environment.yml)}
+  dynamodb: ${file(./lib/Databases/index.js):all}
+provider:
+  name: aws
+  runtime: nodejs6.10
+  role: ${self:custom.config.HEALTH_CARE_TOOL_LAMBDA_ROLE}
+  # deploymentBucket: ${self:custom.config.HEALTH_CARE_TOOL_DEPLOYMENT_BUCKET}
+  stage: ${self:custom.stage}
+  profile: ${self:custom.config.PROFILE}
+  region: us-east-1
+  environment: ${self:custom.lambda_environment}
+  memorySize: 256
+  timeout: 30
+  versionFunctions: false # Optional function versioning
+
+package:
+  individually: true
+exclude:
+  - .gitignore
+  - .jshintrc
+  - .npmignore
+  - .env
+  - LexStack/**
+  - env-vars/**
+  - context.json
+  - event-data/**
+  - data/**
+  - deploy.env
+  - Gruntfile.js
+  - policy-document.txt
+  - README.md
+
+functions:
+  HealthCareTool:
+    handler: lib/Lambda/IntentResolution/handlePremiumQuery.handler
+    name: HealthCareTool
+    description: Calculate health care premium increase for proposed senate bill 2017
+
+resources:
+  Resources: 
+    HealthCarePremiumTable:
+      Type: AWS::DynamoDB::Table
+      Properties: ${self:custom.dynamodb.HealthCarePremiumTable.meta}
+    AARPAI: ${self:custom.config.AARP_AI_ROLE}

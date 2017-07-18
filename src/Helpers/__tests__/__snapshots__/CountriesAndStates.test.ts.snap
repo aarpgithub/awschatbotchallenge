@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should produce the correct abbreviation for example state names 1`] = `
+Array [
+  "CA",
+  "NV",
+  "WA",
+]
+`;
+
+exports[`Should throw an error on invalid state names 1`] = `"Error missing field state.  Input: Kalifornia"`;
