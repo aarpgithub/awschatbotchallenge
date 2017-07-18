@@ -15,7 +15,7 @@ Change directory to project for remaining steps
 Deploy Full Stack to production
 -------------------------------
 1. npm install
-2. npm run production-deploy
+2. npm run dev-deploy
 
 Re-compile typescript on file change
 ------------------------------------

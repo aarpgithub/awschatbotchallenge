@@ -11,7 +11,7 @@
     "test-debug": "node --inspect ./node_modules/.bin/jest -runInBand --testPathIgnorePatterns COSTS_MONEY",
     "build": "rm -rf ./lib/ && tsc",
     "watch": "tsc -w",
-    "dev-deploy": "npm run build && serverless deploy -s dev && serverless deploy-lexbot -s dev",
+    "dev-deploy": "npm run build && serverless deploy -s dev && serverless deploy-lexbot -s dev && serverless deploy-dynamodb -s dev --table HealthCarePremiumTable",
     "stage-deploy": "npm run build && serverless deploy -s stage && serverless deploy-lexbot -s stage && serverless deploy-dynamodb -s stage --table HealthCarePremiumTable",
     "prod-deploy": "npm run build && serverless deploy -s prod && serverless deploy-lexbot -s prod"
   },
@@ -28,16 +28,8 @@
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json",
-      "jsx"
-    ],
-    "modulePathIgnorePatterns": [
-      "./lib/"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "json", "jsx"],
+    "modulePathIgnorePatterns": ["./lib/"]
   },
   "dependencies": {
     "aws-sdk": "^2.85.0",

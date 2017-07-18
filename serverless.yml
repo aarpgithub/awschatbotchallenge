@@ -13,7 +13,6 @@ provider:
   name: aws
   runtime: nodejs6.10
   role: ${self:custom.config.HEALTH_CARE_TOOL_LAMBDA_ROLE}
-  # deploymentBucket: ${self:custom.config.HEALTH_CARE_TOOL_DEPLOYMENT_BUCKET}
   stage: ${self:custom.stage}
   profile: ${self:custom.config.PROFILE}
   region: us-east-1
